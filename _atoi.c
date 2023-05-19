@@ -1,73 +1,73 @@
 #include "shell.h"
 
 /**
- * interactive - returns true if shell is interactive mode
- * @info: struct address
+ * interact - returns true if shell is interactive mode
+ * @inform: struct address
  *
  * Return: 1 if interactive mode, 0 otherwise
  */
-int interactive(info_t *info)
+int interact(info_t *inform)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && inform->readfd <= 2);
 }
 
 /**
- * is_delim - checks if character is a delimeter
- * @c: the char to check
- * @delim: the delimeter string
+ * is_del - checks if character is a delimeter
+ * @x: the char to check
+ * @del: the delimeter string
  * Return: 1 if true, 0 if false
  */
-int is_delim(char c, char *delim)
+int is_del(char x, char *del)
 {
-	while (*delim)
-		if (*delim++ == c)
+	while (*del)
+		if (*del++ == x)
 			return (1);
 	return (0);
 }
 
 /**
- * _isalpha - checks for alphabetic character
- * @c: The character to input
+ * _isalp - checks for alphabetic character
+ * @x: The character to input
  * Return: 1 if c is alphabetic, 0 otherwise
  */
 
-int _isalpha(int c)
+int _isalp(int x)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
 		return (1);
 	else
 		return (0);
 }
 
 /**
- * _atoi - converts a string to an integer
- * @s: the string to be converted
+ * _atoinie - converts a string to an integer
+ * @b: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  */
-int _atoi(char *s)
+int _atoinie(char *b)
 {
-	int i, sign = 1, flag = 0, output;
-	unsigned int result = 0;
+	int y, mark = 1, pole = 0, outp;
+	unsigned int ans = 0;
 
-	for (i = 0; s[i] != '\0' && flag != 2; i++)
+	for (y = 0; b[y] != '\0' && pole != 2; y++)
 	{
-		if (s[i] == '-')
-			sign *= -1;
+		if (b[y] == '-')
+			mark *= -1;
 
-		if (s[i] >= '0' && s[i] <= '9')
+		if (b[y] >= '0' && b[y] <= '9')
 		{
-			flag = 1;
-			result *= 10;
-			result += (s[i] - '0');
+			pole = 1;
+			ans *= 10;
+			ans += (s[i] - '0');
 		}
-		else if (flag == 1)
-			flag = 2;
+		else if (pole == 1)
+			pole = 2;
 	}
 
-	if (sign == -1)
-		output = -result;
+	if (mark == -1)
+		outp = -ans;
 	else
-		output = result;
+		outp = ans;
 
-	return (output);
+	return (outp);
 }
