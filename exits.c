@@ -1,74 +1,73 @@
 #include "shell.h"
 
 /**
- * _strncpy - copies a string
- * @dest: the destination string to be copied to
- * @src: the source string
- * @n: the amount of characters to be copied
+ * _strngcpy - copies a string
+ * @dxt: the destination string to be copied to
+ * @sorc: the source string
+ * @u: the amount of characters to be copied
  * Return: the concatenated string
  */
-char *_strncpy(char *dest, char *src, int n)
+char *_strngcpy(char *dxt, char *sorc, int u)
 {
-	int i, j;
-	char *s = dest;
+	int h, l;
+	char *es = dxt;
 
-	i = 0;
-	while (src[i] != '\0' && i < n - 1)
+	h = 0;
+	while (sorc[h] != '\0' && h < u - 1)
 	{
-		dest[i] = src[i];
-		i++;
+		dxt[h] = sorc[h];
+		h++;
 	}
-	if (i < n)
+	if (h < u)
 	{
-		j = i;
-		while (j < n)
+		l = h;
+		while (l < u)
 		{
-			dest[j] = '\0';
-			j++;
+			dest[l] = '\0';
+			l++;
 		}
 	}
-	return (s);
+	return (es);
 }
-
 /**
- * _strncat - concatenates two strings
- * @dest: the first string
- * @src: the second string
- * @n: the amount of bytes to be maximally used
+ * _strngcat - concatenates two strings
+ * @dxt: the first string
+ * @sorc: the second string
+ * @u: the amount of bytes to be maximally used
  * Return: the concatenated string
  */
-char *_strncat(char *dest, char *src, int n)
+char *_strngcat(char *dxt, char *sorc, int u)
 {
-	int i, j;
-	char *s = dest;
+	int h, l;
+	char *es = dest;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0' && j < n)
+	h = 0;
+	l = 0;
+	while (dest[h] != '\0')
+		h++;
+	while (sorc[l] != '\0' && l < u)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		dest[h] = src[l];
+		h++;
+		l++;
 	}
-	if (j < n)
-		dest[i] = '\0';
-	return (s);
+	if (l < u)
+		dxt[h] = '\0';
+	return (es);
 }
 
 /**
- * _strchr - locates a character in a string
- * @s: the string to be parsed
- * @c: the character to look for
- * Return: (s) a pointer to the memory area s
+ * _strcat - locates a character in a string
+ * @x: the string to be parsed
+ * @se: the character to look for
+ * Return: (x) a pointer to the memory area s
  */
-char *_strchr(char *s, char c)
+char *_strcat(char *x, char se)
 {
 	do {
-		if (*s == c)
-			return (s);
-	} while (*s++ != '\0');
+		if (*x == se)
+			return (x);
+	} while (*x++ != '\0');
 
 	return (NULL);
 }
