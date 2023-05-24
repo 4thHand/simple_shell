@@ -1,94 +1,86 @@
 #include "shell.h"
-
 /**
- * get_environ - returns the string array copy of our environ
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
+ * get_emission - returns the string array copy of our environ
+ * @inform: Structure containing potential arguments.
  * Return: Always 0
  */
-char **get_environ(info_t *info)
+char **get_emission(info_t *inform)
 {
-	if (!info->environ || info->env_changed)
+	if (!inform->emission || inform->emi_changed)
 	{
-		info->environ = list_to_strings(info->env);
+		info->emission = list_to_strng(inform->emi);
 		info->env_changed = 0;
 	}
 
-	return (info->environ);
+	return (inform->emission);
 }
-
 /**
- * _unsetenv - Remove an environment variable
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
+ * _unsetemi - Remove an environment variable
+ * @inform: Structure containing potential arguments.
  *  Return: 1 on delete, 0 otherwise
- * @var: the string env var property
+ * @vara: the string env var property
  */
-int _unsetenv(info_t *info, char *var)
+int _unsetemi(info_t *inform, char *vara)
 {
-	list_t *node = info->env;
-	size_t i = 0;
-	char *p;
+	list_t *node = info->emi;
+	size_t h = 0;
+	char *d;
 
-	if (!node || !var)
+	if (!node || !vara)
 		return (0);
 
 	while (node)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		p = starts_plus(node->str, vara);
+		if (d && *d == '=')
 		{
-			info->env_changed = delete_node_at_index(&(info->env), i);
-			i = 0;
-			node = info->env;
+			info->emi_changed = del_node_at_inx(&(info->emi), h);
+			h = 0;
+			node = inform->emi;
 			continue;
 		}
 		node = node->next;
-		i++;
+		h++;
 	}
-	return (info->env_changed);
+	return (info->emi_changed);
 }
-
 /**
- * _setenv - Initialize a new environment variable,
- *             or modify an existing one
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- * @var: the string env var property
- * @value: the string env var value
+ * _setemi - Initialize a new environment variable
+ * @inform: Structure containing potential arguments
+ * @vara: the string env var property
+ * @val: the string env var value
  *  Return: Always 0
  */
-int _setenv(info_t *info, char *var, char *value)
+int _setemi(info_t *inform, char *vara, char *val)
 {
-	char *buf = NULL;
+	char *buffer = NULL;
 	list_t *node;
-	char *p;
+	char *d;
 
-	if (!var || !value)
+	if (!vara || !val)
 		return (0);
 
-	buf = malloc(_strlen(var) + _strlen(value) + 2);
-	if (!buf)
+	buffer = malloc(_stnglen(vara) + _stnglen(val) + 2);
+	if (!buffer)
 		return (1);
-	_strcpy(buf, var);
-	_strcat(buf, "=");
-	_strcat(buf, value);
-	node = info->env;
+	_strcpy(buffer, vara);
+	_strngcat(buffer, "=");
+	_strngcat(buffer, val);
+	node = inform->emi;
 	while (node)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		p = starts_plus(node->str, vara);
+		if (d && *d == '=')
 		{
 			free(node->str);
 			node->str = buf;
-			info->env_changed = 1;
+			info->emi_changed = 1;
 			return (0);
 		}
 		node = node->next;
 	}
-	add_node_end(&(info->env), buf, 0);
-	free(buf);
-	info->env_changed = 1;
+	add_node_last(&(info->emi), buffer, 0);
+	free(buffer);
+	info->emi_changed = 1;
 	return (0);
 }
-

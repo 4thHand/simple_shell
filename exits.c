@@ -71,4 +71,3 @@ char *_strcat(char *x, char se)
 
 	return (NULL);
 }
-
