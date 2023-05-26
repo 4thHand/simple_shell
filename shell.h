@@ -44,7 +44,7 @@ extern char **emission;
 typedef struct liststng
 {
 	int numb;
-	char *stng;
+	char *str;
 	struct liststng *next;
 } list_t;
 
@@ -81,7 +81,7 @@ typedef struct passinfo
 	int ercount_put;
 	char *filename;
 	list_t *emi;
-	list_t *hist;
+	list_t *history;
 	list_t *alias;
 	char **emission;
 	int emi_ch;
