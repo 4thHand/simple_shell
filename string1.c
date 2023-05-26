@@ -23,12 +23,12 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strdup - duplicates a string
+ * _strdupp - duplicates a string
  * @str: the string to duplicate
  *
  * Return: pointer to the duplicated string
  */
-char *_strdup(const char *str)
+char *_strdupp(const char *str)
 {
 	int length = 0;
 	char *ret;
@@ -47,12 +47,12 @@ char *_strdup(const char *str)
 }
 
 /**
- * _puts - prints an input string
+ * _puttss - prints an input string
  * @str: the string to be printed
  *
  * Return: Nothing
  */
-void _puts(char *str)
+void _puttss(char *str)
 {
 	int i = 0;
 

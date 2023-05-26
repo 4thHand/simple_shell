@@ -12,10 +12,10 @@ int _miex(info_t *inform)
 
 	if (inform->argv[1]) /* If there is an exit arguement */
 	{
-		excheck = _erratoi(info->argv[1]);
+		excheck = _erratoinie(info->argv[1]);
 		if (excheck == -1)
 		{
-			inform->status = 2;
+			inform->stat = 2;
 			display_err(info, "Illegal number: ");
 			_eputtss(info->argv[1]);
 			_eputchar('\n');
@@ -50,7 +50,7 @@ int _micd(info_t *inform)
 		else
 			chardr_ret = chdir(dr);
 	}
-	else if (_strcmp(inform->argv[1], "-") == 0)
+	else if (_strngcmp(inform->argv[1], "-") == 0)
 	{
 		if (!_getemi(inform, "OLDPWD="))
 		{

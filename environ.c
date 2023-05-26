@@ -23,7 +23,7 @@ char *_getemi(info_t *inform, const char *name)
 
 	while (nd)
 	{
-		d = starts_plus(nd->strng, name);
+		d = starts_plus(nd->str, name);
 		if (d && *d)
 			return (d);
 		nd = nd->next;

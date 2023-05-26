@@ -143,7 +143,7 @@ int _putchar(char);
 
 /* toem_exits.c */
 char *_strngcpy(char *, char *, int);
-char *_strngcat(char *, char *, int);
+char *_stringcat(char *, char *, int);
 char *_strngchr(char *, char);
 
 /* toem_tokenizer.c */
