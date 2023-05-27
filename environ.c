@@ -1,84 +1,93 @@
 #include "shell.h"
 
 /**
- * _mienv - prints the current environment
- * @inform: Structure containing potential arguments.
+ * _myenv - prints the current environment
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
  * Return: Always 0
  */
-int _mienv(info_t *inform)
+int _myenv(info_t *info)
 {
-	display_list_string(inform->env);
+	print_list_str(info->env);
 	return (0);
 }
+
 /**
- * _getemi - gets the value of an environ variable
- * @inform: Structure containing potential arguments. Used to maintain
- * @name: emi var name
+ * _getenv - gets the value of an environ variable
+ * @info: Structure containing potential arguments. Used to maintain
+ * @name: env var name
+ *
  * Return: the value
  */
-char *_getemi(info_t *inform, const char *name)
+char *_getenv(info_t *info, const char *name)
 {
-	list_t *nd = info->emi;
-	char *d;
+	list_t *node = info->env;
+	char *p;
 
-	while (nd)
+	while (node)
 	{
-		d = starts_plus(nd->str, name);
-		if (d && *d)
-			return (d);
-		nd = nd->next;
+		p = starts_with(node->str, name);
+		if (p && *p)
+			return (p);
+		node = node->next;
 	}
 	return (NULL);
 }
 
 /**
- * _misetemi - Initialize or modify an environment variable.
- * @inform: Structure containing potential arguments.
+ * _mysetenv - Initialize a new environment variable,
+ *             or modify an existing one
+ * @info: Structure containing potential arguments. Used to maintain
+ *        constant function prototype.
  *  Return: Always 0
  */
-int _misetemi(info_t *inform)
+int _mysetenv(info_t *info)
 {
-	if (inform->argc != 3)
+	if (info->argc != 3)
 	{
-		_eputtss("Incorrect number of arguements\n");
+		_eputs("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (_setemi(inform, inform->argv[1], inform->argv[2]))
+	if (_setenv(info, info->argv[1], info->argv[2]))
 		return (0);
 	return (1);
 }
 
 /**
- * _miunsetemi - Remove an environment variable
- * @inform: Structure containing potential arguments.
+ * _myunsetenv - Remove an environment variable
+ * @info: Structure containing potential arguments. Used to maintain
+ *        constant function prototype.
  * Return: Always 0
  */
-int _miunsetemi(info_t *inform)
+int _myunsetenv(info_t *info)
 {
-	int h;
+	int i;
 
-	if (inform->argc == 1)
+	if (info->argc == 1)
 	{
-		_eputtss("Too few arguements.\n");
+		_eputs("Too few arguements.\n");
 		return (1);
 	}
-	for (h = 1; h <= inform->argc; h++)
-		_unsetemi(inform, inform->argv[h]);
+	for (i = 1; i <= info->argc; i++)
+		_unsetenv(info, info->argv[i]);
 
 	return (0);
 }
+
 /**
- * populate_emi_list - populates emi linked list
- * @inform: Structure containing potential arguments.
+ * populate_env_list - populates env linked list
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
  * Return: Always 0
  */
-int populate_emi_list(info_t *inform)
+int populate_env_list(info_t *info)
 {
-	list_t *nd = NULL;
-	size_t h;
+	list_t *node = NULL;
+	size_t i;
 
-	for (h = 0; emission[h]; h++)
-		add_node_last(&nd, emission[i], 0);
-	inform->emi = nd;
+	for (i = 0; environ[i]; i++)
+		add_node_end(&node, environ[i], 0);
+	info->env = node;
 	return (0);
 }
+

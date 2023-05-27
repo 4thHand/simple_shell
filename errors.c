@@ -1,81 +1,82 @@
-#include "shell.h"
+#include "simple.h"
 
 /**
- * _eputtss - prints an input string
- * @strng: the string to be printed
+ * _eputts - prints an input string
+ * @str: the string to be printed
  * Return: Nothing
  */
-void _eputtss(char *strng)
+void _eputts(char *str)
 {
-	int x = 0;
+	int i = 0;
 
-	if (!strng)
+	if (!str)
 		return;
-	while (strng[x] != '\0')
+	while (str[i] != '\0')
 	{
-		_eputchar(strng[x]);
-		x++;
+		_eputchar(str[i]);
+		i++;
 	}
 }
 
 /**
  * _eputchar - writes the character c to stderr
- * @x: The character to print
+ * @c: The character to print
+ *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int _eputchar(char x)
+int _eputchar(char c)
 {
-	static int h;
+	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (x == BUF_FLUSH || h >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(2, buf, h);
-		h = 0;
+		write(2, buf, i);
+		i = 0;
 	}
-	if (x != BUF_FLUSH)
-		buf[x++] = x;
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
 	return (1);
 }
 
 /**
- * _putcd - writes the character c to given fd
- * @x: The character to print
- * @cd: The filedescriptor to write to
+ * _putfds - writes the character c to given fd
+ * @c: The character to print
+ * @fd: The filedescriptor to write to
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int _putcd(char x, int cd)
+int _putfds(char c, int fd)
 {
-	static int h;
+	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (x == BUF_FLUSH || h >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(cd, buf, h);
-		h = 0;
+		write(fd, buf, i);
+		i = 0;
 	}
-	if (x != BUF_FLUSH)
-		buf[h++] = x;
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
 	return (1);
 }
 
 /**
- * _putscd - prints an input string
- * @strng: the string to be printed
- * @cd: the filedescriptor to write to
+ * _putsfd - prints an input string
+ * @str: the string to be printed
+ * @fd: the filedescriptor to write to
  * Return: the number of chars put
  */
-int _putscd(char *strng, int cd)
+int _putsfd(char *str, int fd)
 {
-	int h = 0;
+	int i = 0;
 
-	if (!strng)
+	if (!str)
 		return (0);
-	while (*strng)
+	while (*str)
 	{
-		h += _putcd(*strng++, cd);
+		i += _putfds(*str++, fd);
 	}
-	return (h);
+	return (i);
 }

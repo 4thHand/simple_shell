@@ -1,73 +1,75 @@
 #include "shell.h"
 
 /**
- * interact - returns true if shell is interactive mode
- * @inform: struct address
+ * interactive - returns true if shell is interactive mode
+ * @info: struct address
  *
  * Return: 1 if interactive mode, 0 otherwise
  */
-int interact(info_t *inform)
+int interactive(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && inform->readfd <= 2);
+	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
 
 /**
  * is_del - checks if character is a delimeter
- * @x: the char to check
- * @del: the delimeter string
+ * @c: the char to check
+ * @delim: the delimeter string
  * Return: 1 if true, 0 if false
  */
-int is_del(char x, char *del)
+int is_del(char c, char *delim)
 {
-	while (*del)
-		if (*del++ == x)
+	while (*delim)
+		if (*delim++ == c)
 			return (1);
 	return (0);
 }
 
 /**
- * _isalp - checks for alphabetic character
- * @x: The character to input
+ * _isalpha - checks for alphabetic character
+ * @c: The character to input
  * Return: 1 if c is alphabetic, 0 otherwise
  */
 
-int _isalp(int x)
+int _isalpha(int c)
 {
-	if ((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
 	else
 		return (0);
 }
 
 /**
- * _atoinie - converts a string to an integer
- * @b: the string to be converted
+ * _atoin - converts a string to an integer
+ * @s: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  */
-int _atoinie(char *b)
+
+int _atoin(char *s)
 {
-	int y, mark = 1, pole = 0, outp;
-	unsigned int ans = 0;
+	int h, sign = 1, flag = 0, output;
+	unsigned int result = 0;
 
-	for (y = 0; b[y] != '\0' && pole != 2; y++)
+	for (h = 0; s[h] != '\0' && flag != 2; h++)
 	{
-		if (b[y] == '-')
-			mark *= -1;
+		if (s[h] == '-')
+			sign *= -1;
 
-		if (b[y] >= '0' && b[y] <= '9')
+		if (s[h] >= '0' && s[h] <= '9')
 		{
-			pole = 1;
-			ans *= 10;
-			ans += (s[i] - '0');
+			flag = 1;
+			result *= 10;
+			result += (s[h] - '0');
 		}
-		else if (pole == 1)
-			pole = 2;
+		else if (flag == 1)
+			flag = 2;
 	}
 
-	if (mark == -1)
-		outp = -ans;
+	if (sign == -1)
+		output = -result;
 	else
-		outp = ans;
+		output = result;
 
-	return (outp);
+	return (output);
 }
+
